@@ -38,10 +38,16 @@ def generate_response(transactions: typing.Any) -> typing.Any:
             and transaction["Статус"] == "OK"
         ) and transaction["Категория"] not in ("Пополнения", "Переводы", "Бонусы"):
 
-            cards_info[card_number]["total_spent"] += amount
-            cards_info[card_number]["cashback"] += amount / 100
-            cards_info[card_number]["total_spent"] = round(cards_info[card_number]["total_spent"], 2)
-            cards_info[card_number]["cashback"] = round(cards_info[card_number]["cashback"], 2)
+            total_spent = cards_info[card_number].get("total_spent", 0) + amount
+            cashback = cards_info[card_number].get("cashback", 0) + amount / 100
+
+            cards_info[card_number]["total_spent"] = round(float(total_spent), 2)
+            cards_info[card_number]["cashback"] = round(float(cashback), 2)
+
+            # cards_info[card_number]["total_spent"] += amount
+            # cards_info[card_number]["cashback"] += amount / 100
+            # cards_info[card_number]["total_spent"] = round(float(cards_info[card_number]["total_spent"], 2))
+            # cards_info[card_number]["cashback"] = round(cards_info[card_number]["cashback"], 2)
     response = list(cards_info.values())
 
     return json.dumps(response, ensure_ascii=False, indent=4)
