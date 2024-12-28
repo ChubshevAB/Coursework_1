@@ -32,19 +32,15 @@ if __name__ == "__main__":
 
     cards = generate_response(transactions)
     cards_data = json.loads(cards)
-    cards_fix = json.dumps(cards_data, ensure_ascii=False)
 
     top_transactions = top_transactions(transactions)
     top_transactions_data = json.loads(top_transactions)
-    top_transactions_fix = json.dumps(top_transactions_data, ensure_ascii=False)
 
     currency_rates = get_currency_rate(api_key, user_settings)
     currency_rates_data = json.loads(currency_rates)
-    currency_rates_fix = json.dumps(currency_rates_data, ensure_ascii=False)
 
     stock_prices = get_price(user_settings_for_share)
     stock_prices_data = json.loads(stock_prices)
-    stock_prices_fix = json.dumps(stock_prices_data, ensure_ascii=False)
 
     user_input = input('Для начала работы введите дату и время в формате "год-месяц-день часы:минуты:секунды": ')
 
